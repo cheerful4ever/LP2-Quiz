@@ -3,9 +3,9 @@ package com.myapplicationdev.android.lp2_quiz;
 public class ToDo {
     private int id;
     private String date;
-    private int data;
+    private String data;
 
-    public ToDo(int id, String date, int data) {
+    public ToDo(int id, String date, String data) {
         this.id = id;
         this.date = date;
         this.data = data;
@@ -19,7 +19,7 @@ public class ToDo {
         return date;
     }
 
-    public int getData() {
+    public String getData() {
         return data;
     }
 }
