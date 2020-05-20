@@ -64,7 +64,7 @@ public class DBHelper extends SQLiteOpenHelper {
             do {
                 int id = cursor.getInt(0);
                 String date = cursor.getString(1);
-                String data = cursor.getInt(2);
+                String data = cursor.getString(2);
 
                 ToDo todo = new ToDo(id, date, data);
                 notes.add(todo);
@@ -78,30 +78,26 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<String> getNoteContent() {
         //TODO return records in Strings
 
+        ArrayList<String> todos = new ArrayList<String>();
+        String selectQuery = "SELECT note_content from todo";
 
-        // Create an ArrayList that holds String objects
-        ArrayList<String> notes = new ArrayList<String>();
-        // Select all the notes' content
-        String selectQuery = "SELECT note_content from note";
 
-        // Get the instance of database to read
         SQLiteDatabase db = this.getReadableDatabase();
-        // Run the SQL query and get back the Cursor object
         Cursor cursor = db.rawQuery(selectQuery, null);
-        // moveToFirst() moves to first row
+
         if (cursor.moveToFirst()) {
-            // Loop while moveToNext() points to next row and returns true;
-            // moveToNext() returns false when no more next row to move to
             do {
-                notes.add(cursor.getString(0));
+                int id = cursor.getInt(0);
+                String Date = cursor.getString(1);
+                String Data = cursor.getString(2);
+                todos.add(cursor.getString(0));
 
             } while (cursor.moveToNext());
         }
-        // Close connection
         cursor.close();
         db.close();
 
-        return notes;
+        return todos;
     }
 }
 
