@@ -12,10 +12,10 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
 
     //TODO Define the Database properties
-    private static final String DATABASE_NAME = "Note.db";
+    private static final String DATABASE_NAME = "mydb.db";
     private static final int DATABASE_VERSION = 1;
 
-    private static final String TABLE_NOTE = "note";
+    private static final String TABLE_TODO = "todo";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_DATE = "date";
     private static final String COLUMN_DATA = "data";
@@ -35,11 +35,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TODO);
         onCreate(db);
     }
 
-    public void insertToDo(String noteContent, int stars) {
+    public void insertToDo(String data, String date) {
         //TODO insert the data into the database
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -47,26 +47,26 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_DATA, data);
         values.put(COLUMN_DATE, date);
 
-        db.insert(TABLE_NOTE, null, values);
+        db.insert(TABLE_TODO, null, values);
         db.close();
     }
 
-    public ArrayList<ToDo> getAllNotes() {
+    public ArrayList<ToDo> getToDo() {
         //TODO return records in Java objects
         ArrayList<ToDo> notes = new ArrayList<ToDo>();
         String selectQuery = "SELECT " + COLUMN_ID + "," +
-                COLUMN_NOTE_CONTENT + "," + COLUMN_STARS + " FROM "
-                + TABLE_NOTE;
+                COLUMN_DATE + "," + COLUMN_DATA+ " FROM "
+                + TABLE_TODO;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(0);
-                String title = cursor.getString(1);
-                int stars = cursor.getInt(2);
+                String date = cursor.getString(1);
+                String data = cursor.getInt(2);
 
-                ToDo todo = new ToDo(id, title, stars);
+                ToDo todo = new ToDo(id, date, data);
                 notes.add(todo);
             } while (cursor.moveToNext());
         }

@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ToDo n = al.get(position);
                 Intent i = new Intent(MainActivity.this, ModifyActivity.class);
-                i.putExtra("todo", n);
-                startActivity(i);
+                //i.putExtra("todo", n);
+                //startActivity(i);
             }
         });
     }
