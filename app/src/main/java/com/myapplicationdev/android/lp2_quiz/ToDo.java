@@ -15,23 +15,11 @@ public class ToDo {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public int getData() {
         return data;
-    }
-
-    public void setData(int data) {
-        this.data = data;
     }
 }
