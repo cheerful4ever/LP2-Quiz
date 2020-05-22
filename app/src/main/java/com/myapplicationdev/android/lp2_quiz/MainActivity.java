@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -56,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ToDo n = al.get(position);
                 Intent i = new Intent(MainActivity.this, ModifyActivity.class);
-                //i.putExtra("todo", n);
-                //startActivity(i);
+                i.putExtra("todo", n);
+                startActivity(i);
             }
         });
     }
@@ -88,5 +89,15 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == 9){
+            ca.notifyDataSetChanged();
+        }
     }
 }

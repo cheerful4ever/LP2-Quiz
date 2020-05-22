@@ -75,7 +75,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return notes;
     }
 
-    public ArrayList<String> getNoteContent() {
+    public ArrayList<String> getToDoContent() {
         //TODO return records in Strings
 
         ArrayList<String> todos = new ArrayList<String>();
