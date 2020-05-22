@@ -103,7 +103,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public int updateToDo(ToDo data){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_NOTE_CONTENT, data.getNoteContent());
+        values.put(COLUMN_DATA, data.getData());
+        values.put(COLUMN_DATE, data.getDate());
         String condition = COLUMN_ID + "= ?";
         String[] args = {String.valueOf(data.getId())};
         int result = db.update(TABLE_TODO, values, condition, args);
