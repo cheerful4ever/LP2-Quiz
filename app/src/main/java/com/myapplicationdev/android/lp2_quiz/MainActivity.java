@@ -87,6 +87,11 @@ public class MainActivity extends AppCompatActivity {
                 ca.notifyDataSetChanged();
                 return true;
 
+            case R.id.mnuDoremi:
+                al.clear();
+                al.addAll(dbhelper.getToDoRecent());
+                ca.notifyDataSetChanged();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

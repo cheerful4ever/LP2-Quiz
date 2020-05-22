@@ -79,8 +79,10 @@ public class DBHelper extends SQLiteOpenHelper {
         //TODO return records in Strings
 
         ArrayList<String> todos = new ArrayList<String>();
-        String selectQuery = "SELECT note_content from todo";
-
+        String selectQuery = "SELECT " + COLUMN_ID + ", "
+                + COLUMN_DATE + ", "
+                + COLUMN_DATA
+                + " FROM " + TABLE_TODO;;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -119,6 +121,35 @@ public class DBHelper extends SQLiteOpenHelper {
         int result = db.delete(TABLE_TODO, condition, args);
         db.close();
         return result;
+    }
+
+    public ArrayList<String> getToDoRecent() {
+        //TODO return records in Strings
+
+        ArrayList<String> todos = new ArrayList<String>();
+
+        //googled the order by
+        String selectQuery = "SELECT " + COLUMN_ID + ", "
+                + COLUMN_DATE + ", "
+                + COLUMN_DATA
+                + " FROM " + TABLE_TODO + " ORDER BY " + COLUMN_ID +" DESC limit 10";;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String Date = cursor.getString(1);
+                String Data = cursor.getString(2);
+                todos.add(cursor.getString(0));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        return todos;
     }
 }
 
