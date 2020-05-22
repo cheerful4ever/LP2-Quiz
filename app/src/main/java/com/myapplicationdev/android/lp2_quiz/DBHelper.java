@@ -123,10 +123,10 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public ArrayList<String> getToDoRecent() {
+    public ArrayList<ToDo> getToDoRecent() {
         //TODO return records in Strings
 
-        ArrayList<String> todos = new ArrayList<String>();
+        ArrayList<ToDo> todos = new ArrayList<ToDo>();
 
         //googled the order by
         String selectQuery = "SELECT " + COLUMN_ID + ", "
@@ -142,7 +142,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 int id = cursor.getInt(0);
                 String Date = cursor.getString(1);
                 String Data = cursor.getString(2);
-                todos.add(cursor.getString(0));
+                ToDo obj = new ToDo(id, Date, Date);
+                todos.add(obj);
 
             } while (cursor.moveToNext());
         }
