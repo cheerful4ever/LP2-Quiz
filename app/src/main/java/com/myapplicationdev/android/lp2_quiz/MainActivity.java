@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 ToDo n = al.get(position);
                 Intent i = new Intent(MainActivity.this, ModifyActivity.class);
                 i.putExtra("todo", n);
-                startActivity(i);
+                startActivityForResult(i, 9);
             }
         });
     }
